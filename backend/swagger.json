@@ -1,0 +1,901 @@
+{
+"swagger": "2.0",
+"info": {
+"version": "1.0.0", 
+"title": "Bellacasa API documentation",
+"description": "This is the documentation page of the bellacasa RESTful API implemented using the swagger-ui-express npm module.<br>Below you will find a list of possible base enpoints and all methods associated to them.<br> Endpoints can also be tested and example values were given.<br> At the end of the page you will find a 'Models' section; this section holds some of the more complicated data fetched by some endpoints and also contains requested bodies for some post/put methods.<br> All methods were documented with relevant response values.",
+"license": {
+"name": "MIT",
+"url": "https://opensource.org/licenses/MIT"
+}
+},
+"host": "localhost:3000",
+"basePath": "/",
+"tags": [
+{
+"name": "/products",
+"description": "Base endpoint for transactions with the 'products' database table "
+},
+{
+"name": "/colors",
+"description": "Base endpoint for transactions with the 'colors' database table "
+},
+{
+"name": "/account",
+"description": "Base endpoint for transactions with the 'account' database table "
+},
+{
+"name": "/reviews",
+"description": "Base endpoint for transactions with the 'reviews' database table "
+}
+],
+"paths": {
+"/products/product-types": {
+"get": {
+"tags": [
+"/products"
+],
+"summary": "Get all the product types and display names within the database once.",
+"responses": {
+"200": {
+"description": "OK",
+"schema": {
+"type": "object",
+"properties":{
+"productTypes" : {
+"type" :"array", 
+"items" :{
+    "type": "object",
+    "properties":{
+        "type": {
+            "type" : "string"
+        },
+        "display_name": {
+            "type" : "string"
+        }
+    },
+    "example": {
+        "type": "interior_door",
+        "display_name": "Interior doors"
+    }
+}
+}
+}
+}
+}
+}
+}
+},
+"/products/product-categories/{type}": {
+"get": {
+"tags": [
+"/products"
+],
+"summary": "Get all the product categories by type.",
+"parameters" : [
+{
+"name" : "type",
+"in": "path",
+"required": "true",
+"description":"Product type parameter"
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"schema": {
+"type": "object",
+"properties":{
+"productCategories" : {
+    "type" :"array", 
+    "items" :{
+        "type": "object",
+        "properties":{
+            "category": {
+                "type" : "string"
+            }
+        },
+        "example": {
+            "category": "Andromeda"
+        }
+    }
+}
+
+}
+}
+}
+}
+}
+},
+"/products/products-by-category/{category}": {
+"get": {
+"tags": [
+"/products"
+],
+"summary": "Get all the products by category.",
+"parameters" : [
+{
+"name" : "category",
+"in": "path",
+"required": "true",
+"description":"Parameter for the category of a product."
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"schema": {
+"$ref": "#/definitions/Products"
+}
+}
+}
+}
+},
+"/products/products-by-color/{colorId}": {
+"get": {
+"tags": [
+"/products"
+],
+"summary": "Get all the products by category.",
+"parameters" : [
+    {
+    "name" : "colorId",
+    "in": "path",
+    "required": "true",
+    "description":"Parameter for colorId associated with a product."
+    }
+],
+"responses": {
+"200": {
+"description": "OK",
+"schema": {
+    "$ref": "#/definitions/Products"
+}
+}
+}
+}
+},
+"/products/product-details/{id}": {
+"get": {
+"tags": [
+"/products"
+],
+"summary": "Get product details of a product by product ID.",
+"parameters" : [
+{
+"name" : "id",
+"in": "path",
+"required": "true",
+"description":"ID of product."
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"schema": {
+"$ref": "#/definitions/ProductDetails"
+}
+}
+}
+}
+},
+"/colors/product-colors": {
+"get": {
+"tags": [
+"/colors"
+],
+"summary": "Get all the colors from the 'colors' database table.",
+
+"responses": {
+"200": {
+"description": "OK",
+"schema": {
+"$ref": "#/definitions/Colors"
+}
+}
+}
+}
+},
+"/colors/product-colors/{id}": {
+"get": {
+"tags": [
+"/colors"
+],
+"summary": "Get all the colors that a product is associated to by productId.",
+"parameters" : [
+{
+"name" : "id",
+"in": "path",
+"required": "true",
+"description":"ID of product."
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"schema": {
+"$ref": "#/definitions/Colors"
+}
+}
+}
+}
+},
+"/account/signup": {
+"post": {
+"tags": [
+"/account"
+],
+"summary": "Stores the account details of a new user and creates a cookie session for them. If username is taken will throw 409 error saying that the username is in use.",
+"parameters": [
+{
+"in": "body",
+"name": "body",
+"description": "Account object that needs to be added to the account table.",
+"required": true,
+"schema": {
+"$ref": "#/definitions/NewAccount"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"schema": {
+"type": "object",
+"properties":{
+"message": {
+"type" : "string"
+    }
+},
+"example": {
+    "message": "session created"
+}
+}
+},
+"409": {
+"description": "Conflict",
+"schema": {
+"type": "object",
+"properties":{
+"type": {
+    "type" : "string"
+        },
+        "message": {
+        "type" : "string"
+            }
+    },
+    "example": {
+        "type": "error",
+        "message": "This username has already been taken"
+    }
+}
+}
+}
+}
+},
+"/account/login": {
+"post": {
+"tags": [
+"/account"
+],
+"summary": "Login endpoint that restores a cookie session for user. Compares the credentials provided by the user with any data from the database. If a match is found, a cookie session is restores. Otherwise, will throw an error saying that the username or password are invalid.",
+"parameters": [
+{
+"in": "body",
+"name": "body",
+"description": "Login object that needs to be used in order to create a cookie session.",
+"required": true,
+"schema": {
+"$ref": "#/definitions/Login"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"schema": {
+"type": "object",
+"properties":{
+"message": {
+    "type" : "string"
+        }
+    },
+    "example": {
+        "message": "session restored!"
+    }
+}
+},
+"409": {
+"description": "Conflict",
+"schema": {
+"type": "object",
+"properties":{
+    "type": {
+        "type" : "string"
+            },
+            "message": {
+            "type" : "string"
+                }
+        },
+        "example": {
+            "type": "error",
+            "message": "Incorrect username/password"
+        }
+}
+}
+}
+}
+},
+"/account/logout": {
+"get": {
+"tags": [
+"/account"
+],
+"summary": "Logout endpoint that removes a user session. Uses a helper method to check if a user is authenticated by requesting a cookie sessionString. If cookie session is found, will extract the username and log out the user.",
+
+"responses": {
+"200": {
+"description": "OK",
+"schema": {
+"type": "object",
+"properties":{
+    "message": {
+        "type" : "string"
+            }
+        },
+        "example": {
+            "message": "successful logout"
+        }
+}
+}
+}
+}
+},
+"/account/authenticated": {
+"get": {
+"tags": [
+"/account"
+],
+"summary": "Endpoint that returns if a user is authenticated or not. Looks for a valid cookie sessionString and returns true if a cookie session is found. Otherwise, returns a 409 error with a message saying that the user is not authenticates.",
+
+"responses": {
+"200": {
+    "description": "OK",
+    "schema": {
+        "type": "object",
+            "properties":{
+                "authenticated": {
+                    "type" : "string"
+                        }
+                    },
+                    "example": {
+                        "authenticated": "true"
+                    }
+    }
+    },
+    "409": {
+        "description": "Conflict",
+        "schema": {
+            "type": "object",
+                "properties":{
+                    "type": {
+                        "type" : "string"
+                            },
+                            "message": {
+                            "type" : "string"
+                                }
+                        },
+                        "example": {
+                            "type": "error",
+                            "message": "Not authenticated"
+                        }
+        }
+        }
+}
+}
+},
+"/account/info": {
+"get": {
+"tags": [
+"/account"
+],
+"summary": "Endpoint that returns the username of an authenticated user.  Looks for a valid cookie sessionString and returns the username from the sessionString if a cookie session is found. Otherwise, returns a 409 error with a message saying that the user is not authenticates.",
+
+"responses": {
+    "200": {
+        "description": "OK",
+        "schema": {
+            "type": "object",
+                "properties":{
+                    "info": {
+                        "type": "object",
+                        "properties": {
+                            "username": {
+                                "type" : "string"
+                                    }
+                                },
+                                "example": {
+                                    "username": "roxanapopelenatestswagger"
+                                }
+                        }
+                    }
+                    
+        }
+        },
+        "409": {
+            "description": "Conflict",
+            "schema": {
+                "type": "object",
+                    "properties":{
+                        "type": {
+                            "type" : "string"
+                                },
+                                "message": {
+                                "type" : "string"
+                                    }
+                            },
+                            "example": {
+                                "type": "error",
+                                "message": "Not authenticated"
+                            }
+            }
+            }
+}
+}
+},
+"/account/reviews": {
+    "get": {
+    "tags": [
+    "/account"
+    ],
+    "summary": "Endpoint that returns all reviews of a user. Will return an empty array if user has no reviews.",
+    
+    "responses": {
+        "200": {
+            "description": "OK",
+            "schema": {
+                "$ref": "#/definitions/accountReviews"
+                        
+            }
+            }
+    }
+    }
+    },
+    "/reviews/new": {
+        "post": {
+        "tags": [
+        "/reviews"
+        ],
+        "summary": "Endpoint that stores a new review. Will check if the user is authenticated. If it finds a valid cookie session, will then check if the user does not already have a review submitted for this product. If both conditions are met,it will store the review details, productId and accountId in the relevant database tables.",
+        "parameters": [
+            {
+            "in": "body",
+            "name": "body",
+            "description": "Review object that needs to be added to the reviews, reviews_to_account and reviews_to_product tables.",
+            "required": true,
+            "schema": {
+            "$ref": "#/definitions/ReviewBody"
+            }
+            }
+            ],
+        "responses": {
+            "200": {
+                "description": "OK",
+                "schema": {
+                    "type": "object",
+                        "properties":{
+                            "message": {
+                                "type" : "string"
+                                    }
+                                },
+                                "example": {
+                                    "message": "successfully created review"
+                                }
+                        }
+                            
+                            
+                
+                },
+                "400": {
+                    "description": "Conflict",
+                    "schema": {
+                        "type": "object",
+                            "properties":{
+                                "type": {
+                                    "type" : "string"
+                                        },
+                                        "message": {
+                                        "type" : "string"
+                                            }
+                                    },
+                                    "example": {
+                                        "type": "error",
+                                        "message": "Not authenticated"
+                                    }
+                    }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "schema": {
+                            "type": "object",
+                                "properties":{
+                                    "type": {
+                                        "type" : "string"
+                                            },
+                                            "message": {
+                                            "type" : "string"
+                                                }
+                                        },
+                                        "example": {
+                                            "type": "error",
+                                            "message": "you already have a review for this product"
+                                        }
+                        }
+                        }
+
+        }
+        }
+        },
+        "/reviews/{productId}": {
+            "get": {
+            "tags": [
+            "/reviews"
+            ],
+            "summary": "Endpoint that returns all reviews associated with a product by product id. Will return an empty array if product has no reviews.",
+            "parameters" : [
+                {
+                "name" : "productId",
+                "in": "path",
+                "required": "true",
+                "description":"Product id parameter"
+                }
+                ],
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                        "$ref": "#/definitions/ProductReviews"
+                                
+                    }
+                    }
+            }
+            }
+            },
+            "/reviews/update": {
+                "put": {
+                "tags": [
+                "/reviews"
+                ],
+                "summary": "Endpoint that updates an existing review record.",
+                "parameters": [
+                    {
+                    "in": "body",
+                    "name": "body",
+                    "description": "Review object that needs to be updated inside the reviews table.",
+                    "required": true,
+                    "schema": {
+                    "$ref": "#/definitions/UpdateReviewBody"
+                    }
+                    }
+                    ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                                "properties":{
+                                    "message": {
+                                        "type" : "string"
+                                            }
+                                        },
+                                        "example": {
+                                            "message": "successfully updated review"
+                                        }
+                                }
+                                    
+                                    
+                        
+                        }
+                }
+                }
+                }
+},
+"definitions": {
+"Products": {
+"required": [
+"name",
+"id",
+"category",
+"url"
+],
+"properties": {
+"id": {
+"type": "integer",
+"description": "Unique indetifier for product.",
+"example": "10",
+"uniqueItems": true
+},
+"name": {
+"type": "string",
+"description": "Product name.",
+"example": "Arena 3"
+},
+"category": {
+"type": "string",
+"description": "Category within the type of a product: each type of product has one or multiple categories associated with that type.",
+"example": "Arena"
+},
+"url": {
+"type": "string",
+"description": "The location within the project directory of the image that coresponds to a certain product.",
+"example": "/images/products/interior_doors/Arena/Arena3.jpg"
+}
+}
+},
+"ProductDetails": {
+"required": [
+"name",
+"id",
+"category",
+"url"
+],
+"properties": {
+"id": {
+"type": "integer",
+"description": "Unique indetifier for product.",
+"example": "10",
+"uniqueItems": true
+},
+"name": {
+"type": "string",
+"description": "Product name.",
+"example": "Arena 3"
+},
+"category": {
+"type": "string",
+"description": "Category within the type of a product: each type of product has one or multiple categories associated with that type.",
+"example": "Arena"
+},
+"url": {
+"type": "string",
+"description": "The location within the project directory of the image that coresponds to a certain product.",
+"example": "/images/products/interior_doors/Arena/Arena3.jpg"
+},
+"display_name": {
+"type": "string",
+"description": "The display_name of the type of product.",
+"example": "Interior doors"
+}
+}
+},
+"Colors": {
+"required": [
+"name",
+"id",
+"url"
+],
+"properties": {
+"id": {
+"type": "integer",
+"description": "Unique indetifier for color.",
+"example": "10",
+"uniqueItems": true
+},
+"name": {
+"type": "string",
+"description": "Color name.",
+"example": "White Ash"
+},
+"url": {
+"type": "string",
+"description": "The location within the colors directory of the image that coresponds to a certain color.",
+"example": "/images/products/colors/White_Ash.jpg"
+}
+}
+},
+"NewAccount": {
+"required": [
+"firstName",
+"lastName",
+"username",
+"password"
+],
+"properties": {
+"firstName": {
+"type": "string",
+"description": "First name of user.",
+"example": "Roxana"
+},
+"lastName": {
+    "type": "string",
+    "description": "Last name of user.",
+    "example": "Pop"
+    },
+"username": {
+"type": "string",
+"description": "Username of user.",
+"example": "roxanapopelenatestswagger",
+"uniqueItems": true
+},
+"password": {
+"type": "string",
+"description": "The password for the account.",
+"example": "roxanaswaggertest_password"
+}
+}
+},
+"Login": {
+    "required": [
+    "username",
+    "password"
+    ],
+    "properties": {
+    "username": {
+    "type": "string",
+    "description": "Username of user.",
+    "example": "roxanapopelenatestswagger",
+    "uniqueItems": true
+    },
+    "password": {
+    "type": "string",
+    "description": "The password for the account.",
+    "example": "roxanaswaggertest_password"
+    }
+    }
+    },
+    "accountReviews": {
+        "required": [
+        "name",
+        "display_name",
+        "category",
+        "url",
+        "reviewId",
+        "content",
+        "rating"
+        ],
+        "properties": {
+        "name": {
+        "type": "string",
+        "description": "Name of the product that the reviews is about.",
+        "example": "Freestanding 1"
+        },
+        "display_name": {
+        "type": "string",
+        "description": "The display name of the type of product.",
+        "example": "Bathtubs"
+        },
+        "category": {
+        "type": "string",
+        "description": "The product category that the reviews is about.",
+        "example": "Freestanding"
+        },
+        "url": {
+        "type": "string",
+        "description": "The directory path of the product picture that the review is about.",
+        "example": "/images/products/bathtubs/Freestanding1.jpg"
+        },
+        "reviewId": {
+        "type": "int",
+        "description": "The unique identifier of the review.",
+        "example": "1",
+        "uniqueItems": true
+        },
+        "content": {
+        "type": "string",
+        "description": "The content of the review (comment/text body of the review).",
+        "example": "I am in love with this product, I recommend it to anyone interested!"
+        },
+        "rating": {
+        "type": "int",
+        "description": "Rating associated with that review.",
+        "example": "5"
+        }
+        }
+        },
+        "ReviewBody": {
+            "required": [
+            "content",
+            "rating",
+            "productId"
+            ],
+            "properties": {
+            "content": {
+            "type": "string",
+            "description": "Content/Comment of review.",
+            "example": "I am in love with this product"
+            },
+            "rating": {
+            "type": "int",
+            "description": "The rating of a review.",
+            "example": "5"
+            },
+            
+            "productId": {
+                "type": "int",
+                "description": "The id of the product that the review is submitted on.",
+                "example": "67",
+                "uniqueItems": true
+                }
+            }
+            },
+            "ProductReviews": {
+                "required": [
+                "firstName",
+                "lastName",
+                "id",
+                "rating",
+                "timestamp",
+                "content"
+                ],
+                "properties": {
+                "firstName": {
+                "type": "string",
+                "description": "First name of user who submitted the review.",
+                "example": "Roxana",
+                "uniqueItems": true
+                },
+                "lastName": {
+                    "type": "string",
+                    "description": "Last name of user who submitted the review.",
+                    "example": "Pop"
+                    },
+                "id": {
+                "type": "int",
+                "description": "The unique identifier for the user who submitted the review.",
+                "example": "5",
+                "uniqueItems": true
+                },
+                "rating": {
+                    "type": "int",
+                    "description": "The rating of the review.",
+                    "example": "4"
+                    },
+                    "timestamp": {
+                        "type": "timestamp",
+                        "description": "The timestamp of the time when the review record was stored inside the database.",
+                        "example": "12/04/2021"
+                        },
+                        "content": {
+                            "type": "string",
+                            "description": "The content/comment of the review.",
+                            "example": "I am in love with this product"
+                            }
+                }
+                },
+                "UpdateReviewBody": {
+                    "required": [
+                    "content",
+                    "rating",
+                    "id"
+                    ],
+                    "properties": {
+                    "content": {
+                    "type": "string",
+                    "description": "Content of review to be updated.",
+                    "example": "Update: I still love this product!"
+                    },
+                    "rating": {
+                    "type": "string",
+                    "description": "The updated rating value.",
+                    "example": "5"
+                    },
+                    "id": {
+                    "type": "string",
+                    "description": "Review id to be updated.",
+                    "example": "5",
+                    "uniqueItems": true
+                    }
+                    }
+                    }            
+
+},
+"schemes": [
+"http"
+],
+"consumes": [
+"application/json"
+],
+"produces": [
+"application/json"
+]
+}
