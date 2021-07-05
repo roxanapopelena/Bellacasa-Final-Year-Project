@@ -7,9 +7,14 @@
 - download page displays two downloadable catalogue pdfs
 - authentification system implemented with redux that connects to the backend
 - user is redirected once logged in
+- user can see and edit past reviews once they are logged in (using the user management subsystem)
 - logged in session ends when user clicks the 'log out' button
 - option to either log in or sign up
-- catalogue not yet implemented (uses props)
+- review system implemented with restrictons (only registered users can submit reviews and only one review per user is allows for every product)
+- reviews present timestamps to further make them relevant
+- catalogue fully dynamic using API fetches
+- custom API developed using the Express.js framework
+- API fully documented and tested using swagger-ui-express
 Screenshots:<br/>
 ![](Screenshots/Untitled.png)
 ![](Screenshots/Untitled2.png)
