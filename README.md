@@ -13,6 +13,7 @@
 - review system implemented with restrictons (only registered users can submit reviews and only one review per user is allows for every product)
 - reviews present timestamps to further make them relevant
 - catalogue fully dynamic using API fetches
+- option to filter catalogue products by color, category or type
 - custom API developed using the Express.js framework
 - API fully documented and tested using swagger-ui-express
 - deployed on the cloud using Microsoft Azure<br/>
