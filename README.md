@@ -15,6 +15,8 @@
 - catalogue fully dynamic using API fetches
 - custom API developed using the Express.js framework
 - API fully documented and tested using swagger-ui-express
+<br/>
+CAN BE ACCESSED AT http://20.77.0.204/ <br/>
 Screenshots:<br/>
 ![](Screenshots/Untitled.png)
 ![](Screenshots/Untitled2.png)
