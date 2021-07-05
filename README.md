@@ -16,7 +16,6 @@
 - custom API developed using the Express.js framework
 - API fully documented and tested using swagger-ui-express
 - deployed on the cloud using Microsoft Azure
-<br/>
 Screenshots:<br/>
 ![](Screenshots/Untitled.png)
 ![](Screenshots/Untitled2.png)
