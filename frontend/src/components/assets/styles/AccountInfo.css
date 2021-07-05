@@ -1,0 +1,27 @@
+.info__header__container{
+    background:linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('/images/KOFANO.jpg') center center/cover no-repeat;
+    height: 30vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 25px;
+}
+
+.info__btn{
+    display:inline-block;
+    padding: 5px;
+    width: 10%;
+    border: solid;
+
+}
+
+.info__content{
+    display: flex;
+    flex-flow: column;
+    padding: 10px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+}

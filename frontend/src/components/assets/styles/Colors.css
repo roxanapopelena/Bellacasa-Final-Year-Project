@@ -1,0 +1,22 @@
+.colors{ 
+    width: 200px;
+    padding: 2px;
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.color_image{
+    padding: 2px;
+    min-height: 60px;
+    min-width: 60px;
+    max-height: 60px;
+    max-width: 60px;
+    object-fit:fill;
+}
+
+@media only screen and (max-width: 560px) {
+    .colors {
+        width: 100%;
+    }
+  }

@@ -1,0 +1,54 @@
+.product__reviews{
+    border-radius: 5px;
+    padding: 16px;
+    margin: 16px 0;
+    
+}
+.individual__product__review__container{
+    background-color: #eee;
+    box-shadow: 0 0 15px #C6C6C6;
+    padding: 16px;
+    margin: 16px 0;
+}
+
+.individual__product__review__container::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+.individual__product__review__container span {
+    font-size: 20px;
+    margin-right: 15px;
+  }
+.review__timestamp{
+    color:#C70781;
+    font-size: 15px;
+    float: left;
+    margin-right: 20px;
+    border-radius: 50%;
+}
+.fa-comment{
+    font-size: 40px;
+    float: left;
+    margin-right: 20px;
+    border-radius: 50%;
+}
+.rating{
+    float: left;
+    margin-right: 20px;
+    border-radius: 50%;
+}
+.c{
+    font-style: italic;
+}
+
+@media (max-width: 500px) {
+    .individual__product__review__container {
+        text-align: center;
+    }
+    .fa-comment {
+        margin: auto;
+        float: none;
+        display: block;
+    }
+}

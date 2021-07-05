@@ -1,0 +1,22 @@
+.review__form__container {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+.content__textarea{
+    width: 80%;
+    padding: 20px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    resize: none;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+}

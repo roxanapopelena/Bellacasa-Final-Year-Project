@@ -1,0 +1,55 @@
+.container {
+    min-height: 100vh;
+}
+
+.download-header-container{
+    background:linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('/images/Tetyda.jpg') center center/cover no-repeat;
+    height: 30vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 25px;
+}
+.download-content{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+    padding:10px;
+}
+.brochureContainer{
+    padding:20px;
+}
+.brochures{
+    display: flex;
+    flex-flow: column;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+    padding:20px;
+    min-width: 35vh;
+    min-height: 65vh;
+    background-color: #EFEFEF;
+
+}
+.brochure-img1,
+.brochure-img2{
+    min-width: 35vh;
+    min-height: 55vh;
+    align-self: center;
+}
+.brochure-img1{
+    background: url('/images/class.jpg') center center/cover no-repeat;
+}
+.brochure-img2{
+    background: url('/images/bell.jpg') center center/cover no-repeat;
+}
+
+.brochure-desc{
+    margin-top: 10px;
+    font-size: 15px;
+    max-width: 20rem;
+}

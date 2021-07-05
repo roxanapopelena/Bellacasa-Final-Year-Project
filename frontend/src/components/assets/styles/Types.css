@@ -1,0 +1,20 @@
+.product_types{
+    color:#C70781;
+    padding: 8px;
+    text-indent: 1rem;
+    list-style-type: none;
+    cursor: pointer;
+    font-size: 20px;
+    
+}
+.product_categories{
+    color:black;
+    text-indent: 2rem;
+    font-size:18px;
+    text-decoration: none;
+
+}
+
+.product_categories:focus{
+    color:#C70781;
+}

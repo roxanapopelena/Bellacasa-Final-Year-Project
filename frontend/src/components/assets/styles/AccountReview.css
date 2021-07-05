@@ -1,0 +1,7 @@
+.account__review__container {
+    padding: 10px;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}

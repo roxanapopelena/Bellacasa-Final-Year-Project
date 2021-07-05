@@ -1,0 +1,44 @@
+.catalogue-container {
+    min-height: 175vh;
+}
+
+.catalogue-header-container{
+    background:linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('/images/KSANTOS NEW.jpg') center center/cover no-repeat;
+    height: 30vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 25px;
+}
+.menu_container{
+    border-style: thin;
+    box-shadow: 0 0 15px #C70781;
+}
+
+.item-container{
+    display: flex;
+    flex-flow: row;
+    align-items:flex-start;
+    justify-content: center;
+    padding: 10px;
+    width: 100%;
+}
+.all__container{
+    display: flex;
+    flex-flow: row;
+}
+
+
+@media only screen and (max-width: 560px) {
+    .all__container {
+    flex-wrap: wrap;
+    text-align: center;
+    }
+  }
+
+  @media only screen and (max-width: 950px) {
+    .item-container {
+    padding: 0px;
+    }
+  }
