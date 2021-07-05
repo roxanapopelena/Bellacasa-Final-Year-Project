@@ -23,7 +23,7 @@ BACKEND CAN BE ACCESSED AT http://20.77.0.204/server
 
 Screenshots:<br/>
 ![](Screenshots/Untitled.png)
-![](Screenshots/Untitled2.png)
+![](Screenshots/Untitled2.PNG)
 ![](Screenshots/Untitled3.png)
 ![](Screenshots/Untitled4.png)
 ![](Screenshots/Untitled5.png)
@@ -33,7 +33,7 @@ Screenshots:<br/>
 ![](Screenshots/Untitled9.png)
 ![](Screenshots/Untitled10.png)
 ![](Screenshots/Untitled11.png)
-![](Screenshots/Untitled12.png)
+![](Screenshots/Untitled12.PNG)
 ![](Screenshots/Untitled13.png)
 ![](Screenshots/Untitled14.png)
 ![](Screenshots/Untitled15.png)
