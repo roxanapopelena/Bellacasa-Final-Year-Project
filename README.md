@@ -18,7 +18,7 @@
 - deployed on the cloud using Microsoft Azure
 <br/>
 FRONTEND CAN BE ACCESSED AT http://20.77.0.204/ <br/><br/>
-BACKEND CAN BE ACCESSED AT http://20.77.0.204/server <br/><br/>
+BACKEND CAN BE ACCESSED AT http://20.77.0.204/server
 Screenshots:<br/>
 ![](Screenshots/Untitled.png)
 ![](Screenshots/Untitled2.png)
